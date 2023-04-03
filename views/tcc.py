@@ -6,6 +6,11 @@ from bson.json_util import loads, dumps
 
 router = APIRouter()
 
+
+@router.get("/")
+async def hello():
+    return "hello"
+
 @router.post("/tcc", status_code=status.HTTP_201_CREATED)
 async def add_new_tcc_team(team: Users):
     team_data = team.dict()
