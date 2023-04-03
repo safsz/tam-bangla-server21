@@ -1,8 +1,10 @@
+from os import getenv
 from fastapi import FastAPI
 from pydantic import BaseModel
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
+import uvicorn
 
 import config, routes
 
@@ -35,3 +37,7 @@ app = application_details()
 @app.exception_handler(StarletteHTTPException)
 async def http_exception_handler(request, exc):
     return PlainTextResponse(str(exc.detail), status_code=exc.status_code)
+
+if __name__ == "__main__":
+    port = int(getenv("PORT", 8000))
+    uvicorn.run("app.api:app", host="0.0.0.0", port=port, reload=True)
