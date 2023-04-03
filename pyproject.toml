@@ -7,7 +7,6 @@ readme = "README.md"
 packages = [{include = "tam_bangla_server"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
 fastapi = "^0.95.0"
 uvicorn = "^0.21.1"
 gunicorn = "^20.1.0"
