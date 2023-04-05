@@ -9,10 +9,11 @@ import uvicorn
 import config, routes
 
 
-def get_origins():
-    origins = [config.APP_DOMAIN]
-    return origins
-
+origins = [
+    "https://tambangla.com",
+    "http://localhost",
+    "http://localhost:3000",
+]
 
 def application_details() -> FastAPI:
     application = FastAPI(
@@ -23,12 +24,13 @@ def application_details() -> FastAPI:
     application.include_router(routes.router, prefix=config.API_ROUTE_PREFIX)
     application.add_middleware(
         CORSMiddleware,
-        allow_origins=get_origins(),
+        allow_origins=origins,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
     )
     return application
+
 
 
 app = application_details()
